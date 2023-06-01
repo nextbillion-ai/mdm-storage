@@ -26,3 +26,8 @@ type Chunk struct {
 	RetryTimes   uint8      `gorm:"column:retry_times"`
 	FinishedAt   time.Time  `gorm:"column:finished_at"`
 }
+
+// TableName overrides the table name used by Task to `profiles`
+func (Chunk) TableName() string {
+	return "mdm.chunks"
+}

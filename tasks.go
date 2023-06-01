@@ -30,3 +30,8 @@ type Task struct {
 	PickedUpAt            time.Time `gorm:"column:picked_up_at"`
 	FinishedAt            time.Time `gorm:"column:finished_at"`
 }
+
+// TableName overrides the table name used by Task to `profiles`
+func (Task) TableName() string {
+	return "mdm.tasks"
+}
