@@ -25,6 +25,8 @@ type Chunk struct {
 	ResourceInfo string     `gorm:"column:resource_info"`
 	RetryTimes   uint8      `gorm:"column:retry_times"`
 	FinishedAt   time.Time  `gorm:"column:finished_at"`
+	Origins      string     `gorm:"column:origins"`
+	Destinations string     `gorm:"column:destinations"`
 }
 
 // TableName overrides the table name used by Task to `profiles`
