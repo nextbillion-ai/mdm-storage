@@ -27,6 +27,7 @@ type Chunk struct {
 	FinishedAt   time.Time  `gorm:"column:finished_at"`
 	Origins      string     `gorm:"column:origins"`
 	Destinations string     `gorm:"column:destinations"`
+	CreateAt     time.Time  `gorm:"column:created_at"`
 }
 
 // TableName overrides the table name used by Task to `profiles`
