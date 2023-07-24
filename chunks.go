@@ -18,16 +18,18 @@ const (
 )
 
 type Chunk struct {
-	ID           uint32     `gorm:"column:id;primaryKey"`
-	ChunkIndex   uint32     `gorm:"column:chunk_index"`
-	TaskID       string     `gorm:"column:task_id"`
-	State        ChunkState `gorm:"column:state"`
-	ResourceInfo string     `gorm:"column:resource_info"`
-	RetryTimes   uint8      `gorm:"column:retry_times"`
-	FinishedAt   time.Time  `gorm:"column:finished_at"`
-	Origins      string     `gorm:"column:origins"`
-	Destinations string     `gorm:"column:destinations"`
-	CreateAt     time.Time  `gorm:"column:created_at"`
+	ID               uint32     `gorm:"column:id;primaryKey"`
+	ChunkIndex       uint32     `gorm:"column:chunk_index"`
+	TaskID           string     `gorm:"column:task_id"`
+	State            ChunkState `gorm:"column:state"`
+	ResourceInfo     string     `gorm:"column:resource_info"`
+	RetryTimes       uint8      `gorm:"column:retry_times"`
+	FinishedAt       time.Time  `gorm:"column:finished_at"`
+	Origins          string     `gorm:"column:origins"`
+	Destinations     string     `gorm:"column:destinations"`
+	OriginIndex      string     `gorm:"column:origin_index"`
+	DestinationIndex string     `gorm:"column:destination_index"`
+	CreateAt         time.Time  `gorm:"column:created_at"`
 }
 
 // TableName overrides the table name used by Task to `profiles`
