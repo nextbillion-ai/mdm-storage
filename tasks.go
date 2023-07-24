@@ -26,6 +26,8 @@ type Task struct {
 	OriginalReq           string    `gorm:"column:original_req"`
 	State                 TaskState `gorm:"column:state"`
 	ResourceAllocatorMeta string    `gorm:"column:resource_allocator_meta"`
+	Area                  string    `gorm:"column:area"`
+	Mode                  string    `gorm:"column:mode"`
 	CreateAt              time.Time `gorm:"column:created_at"`
 	PickedUpAt            time.Time `gorm:"column:picked_up_at"`
 	FinishedAt            time.Time `gorm:"column:finished_at"`
