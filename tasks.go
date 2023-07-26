@@ -33,6 +33,19 @@ type Task struct {
 	FinishedAt            time.Time `gorm:"column:finished_at"`
 }
 
+// ExtractedParams is the struct of extracted_params in tasks table
+type ExtractedParams struct {
+	DepartureTime uint64 `json:"departure_time,omitempty"`
+	Context       string `json:"context,omitempty"`
+	Avoid         string `json:"avoid,omitempty"`
+	// TODO: skip approaches for now
+	Approaches  string `json:"approaches,omitempty"`
+	RouteType   string `json:"route_type,omitempty"`
+	TruckSize   string `json:"truck_size,omitempty"`
+	TruckWeight uint32 `json:"truck_weight,omitempty"`
+	Option      string `json:"option,omitempty"`
+}
+
 // TableName overrides the table name used by Task to `profiles`
 func (Task) TableName() string {
 	return "mdm.tasks"
