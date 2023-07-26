@@ -23,6 +23,7 @@ type Task struct {
 	NumOfChunks           uint16    `gorm:"column:num_of_chunks"`
 	OutputAddr            string    `gorm:"column:output_addr"`
 	OriginalReq           string    `gorm:"column:original_req"`
+	ExtractedParams       string    `gorm:"column:extracted_params"`
 	State                 TaskState `gorm:"column:state"`
 	ResourceAllocatorMeta string    `gorm:"column:resource_allocator_meta"`
 	Area                  string    `gorm:"column:area"`
