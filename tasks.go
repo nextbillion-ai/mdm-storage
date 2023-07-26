@@ -21,7 +21,6 @@ type Task struct {
 	ID                    uint32    `gorm:"column:id;primaryKey"`
 	TaskID                string    `gorm:"column:task_id"`
 	NumOfChunks           uint16    `gorm:"column:num_of_chunks"`
-	UnitSize              uint16    `gorm:"column:unit_size"`
 	OutputAddr            string    `gorm:"column:output_addr"`
 	OriginalReq           string    `gorm:"column:original_req"`
 	State                 TaskState `gorm:"column:state"`
