@@ -30,6 +30,7 @@ type Task struct {
 	CreateAt              time.Time `gorm:"column:created_at"`
 	PickedUpAt            time.Time `gorm:"column:picked_up_at"`
 	FinishedAt            time.Time `gorm:"column:finished_at"`
+	RetryTimes            uint8     `gorm:"column:retry_times"`
 }
 
 // ExtractedParams is the struct of extracted_params in tasks table
