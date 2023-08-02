@@ -31,6 +31,7 @@ type Task struct {
 	PickedUpAt            time.Time `gorm:"column:picked_up_at"`
 	FinishedAt            time.Time `gorm:"column:finished_at"`
 	RetryTimes            uint8     `gorm:"column:retry_times"`
+	CDNAddr               string    `gorm:"column:cdn_addr"`
 }
 
 // ExtractedParams is the struct of extracted_params in tasks table
@@ -45,6 +46,7 @@ type ExtractedParams struct {
 	TruckWeight uint32 `json:"truck_weight,omitempty"`
 	Option      string `json:"option,omitempty"`
 	Mode        string `json:"mode,omitempty"`
+	Caller      string `json:"caller,omitempty"`
 }
 
 // TableName overrides the table name used by Task to `profiles`
