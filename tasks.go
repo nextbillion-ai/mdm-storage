@@ -36,9 +36,12 @@ type Task struct {
 
 // ExtractedParams is the struct of extracted_params in tasks table
 type ExtractedParams struct {
-	DepartureTime uint64 `json:"departure_time,omitempty"`
-	Context       string `json:"context,omitempty"`
-	Avoid         string `json:"avoid,omitempty"`
+	DepartureTime      uint64 `json:"departure_time,omitempty"`
+	Context            string `json:"context,omitempty"`
+	Avoid              string `json:"avoid,omitempty"`
+	Key                string `json:"key,omitempty"`
+	NbGatewayTrackInfo string `json:"nb-gateway-track-info,omitempty"`
+
 	// TODO: skip approaches for now
 	Approaches  string `json:"approaches,omitempty"`
 	RouteType   string `json:"route_type,omitempty"`
