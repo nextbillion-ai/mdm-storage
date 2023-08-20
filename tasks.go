@@ -17,6 +17,23 @@ const (
 	TFailed
 )
 
+func (s TaskState) String() string {
+	res := ""
+	switch {
+	case s == TPending:
+		res = "pending"
+	case s == TRunning:
+		res = "running"
+	case s == TPartiallySucceeded:
+		res = "partially_succeeded"
+	case s == TFullySucceeded:
+		res = "fully_succeeded"
+	case s == TFailed:
+		res = "failed"
+	}
+	return res
+}
+
 type Task struct {
 	ID                    uint32    `gorm:"column:id;primaryKey"`
 	TaskID                string    `gorm:"column:task_id"`

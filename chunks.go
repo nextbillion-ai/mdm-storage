@@ -17,6 +17,23 @@ const (
 	CFailed
 )
 
+func (s ChunkState) String() string {
+	res := ""
+	switch {
+	case s == CPending:
+		res = "pending"
+	case s == CResourceCreating:
+		res = "resource_creating"
+	case s == CRunning:
+		res = "running"
+	case s == CSucceeded:
+		res = "successed"
+	case s == CFailed:
+		res = "failed"
+	}
+	return res
+}
+
 type Chunk struct {
 	ID               uint32     `gorm:"column:id;primaryKey"`
 	ChunkIndex       uint32     `gorm:"column:chunk_index"`
