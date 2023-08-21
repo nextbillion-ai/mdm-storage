@@ -42,6 +42,7 @@ type Chunk struct {
 	ResourceInfo     string     `gorm:"column:resource_info"`
 	RetryTimes       uint8      `gorm:"column:retry_times"`
 	FinishedAt       time.Time  `gorm:"column:finished_at"`
+	StartedAt        time.Time  `gorm:"column:started_at"`
 	Origins          string     `gorm:"column:origins"`
 	Destinations     string     `gorm:"column:destinations"`
 	OriginIndex      string     `gorm:"column:origin_index"`
