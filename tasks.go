@@ -1,6 +1,10 @@
 package mdmstorage
 
-import "time"
+import (
+	"encoding/json"
+	"errors"
+	"time"
+)
 
 type TaskState int
 
@@ -58,6 +62,7 @@ type ExtractedParams struct {
 	Avoid              string `json:"avoid,omitempty"`
 	Key                string `json:"key,omitempty"`
 	NbGatewayTrackInfo string `json:"nb-gateway-track-info,omitempty"`
+	Spliter            string `json:"spliter,omitempty"`
 
 	// TODO: skip approaches for now
 	Approaches  string `json:"approaches,omitempty"`
@@ -67,6 +72,20 @@ type ExtractedParams struct {
 	Option      string `json:"option,omitempty"`
 	Mode        string `json:"mode,omitempty"`
 	Caller      string `json:"caller,omitempty"`
+}
+
+func (ep *ExtractedParams) ToJson() (string, error) {
+	if ep == nil {
+		return "", errors.New("ExtractedParams can't be nil")
+	}
+	res, err := json.Marshal(ep)
+	return string(res), err
+}
+
+func ToExtractedParams(value string) (*ExtractedParams, error) {
+	res := new(ExtractedParams)
+	err := json.Unmarshal([]byte(value), res)
+	return res, err
 }
 
 // TableName overrides the table name used by Task to `profiles`
