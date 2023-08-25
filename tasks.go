@@ -53,6 +53,12 @@ type Task struct {
 	FinishedAt            time.Time `gorm:"column:finished_at"`
 	RetryTimes            uint8     `gorm:"column:retry_times"`
 	CDNAddr               string    `gorm:"column:cdn_addr"`
+	Meta                  string    `gorm:"column:meta"`
+}
+
+type Meta struct {
+	FailureReason string   `json:"failure_reason,omitempty"`
+	Errors        []string `json:"errors,omitempty"`
 }
 
 // ExtractedParams is the struct of extracted_params in tasks table

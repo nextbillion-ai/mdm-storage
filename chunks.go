@@ -48,6 +48,8 @@ type Chunk struct {
 	OriginIndex      string     `gorm:"column:origin_index"`
 	DestinationIndex string     `gorm:"column:destination_index"`
 	CreateAt         time.Time  `gorm:"column:created_at"`
+	Meta             string     `gorm:"column:meta"`
+	PodInfo          string     `gorm:"column:pod_info"`
 }
 
 // TableName overrides the table name used by Task to `profiles`
