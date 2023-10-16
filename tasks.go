@@ -71,7 +71,11 @@ type ExtractedParams struct {
 	Spliter            string `json:"spliter,omitempty"`
 
 	// TODO: skip approaches for now
-	Approaches  string `json:"approaches,omitempty"`
+	Approaches string `json:"approaches,omitempty"`
+
+	OriginsApproach      string `json:"origins_approach,omitempty"`
+	DestinationsApproach string `json:"destinations_approach,omitempty"`
+
 	RouteType   string `json:"route_type,omitempty"`
 	TruckSize   string `json:"truck_size,omitempty"`
 	TruckWeight uint32 `json:"truck_weight,omitempty"`
