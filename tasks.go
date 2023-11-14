@@ -102,3 +102,35 @@ func ToExtractedParams(value string) (*ExtractedParams, error) {
 func (Task) TableName() string {
 	return "mdm.tasks"
 }
+
+/*
+-- Table: mdm.tasks
+
+-- DROP TABLE IF EXISTS mdm.tasks;
+
+CREATE TABLE IF NOT EXISTS mdm.tasks
+(
+    id bigint NOT NULL DEFAULT nextval('mdm.tasks_id_seq'::regclass),
+    task_id character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    num_of_chunks integer NOT NULL,
+    output_addr character varying(255) COLLATE pg_catalog."default",
+    original_req text COLLATE pg_catalog."default",
+    state integer,
+    resource_allocator_meta text COLLATE pg_catalog."default",
+    created_at timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    picked_up_at timestamp without time zone,
+    finished_at timestamp without time zone,
+    area character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    extracted_params text COLLATE pg_catalog."default",
+    retry_times integer DEFAULT 0,
+    cdn_addr character varying(255) COLLATE pg_catalog."default",
+    meta text COLLATE pg_catalog."default",
+    CONSTRAINT tasks_pkey PRIMARY KEY (id),
+    CONSTRAINT task_id UNIQUE (task_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mdm.tasks
+    OWNER to fangzhou;
+*/

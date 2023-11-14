@@ -55,3 +55,33 @@ type Chunk struct {
 func (Chunk) TableName() string {
 	return "mdm.chunks"
 }
+
+/*
+-- Table: mdm.chunks
+
+-- DROP TABLE IF EXISTS mdm.chunks;
+
+CREATE TABLE IF NOT EXISTS mdm.chunks
+(
+    id bigint NOT NULL DEFAULT nextval('mdm.chunks_id_seq'::regclass),
+    chunk_index integer,
+    task_id character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    state integer,
+    resource_info text COLLATE pg_catalog."default",
+    retry_times integer,
+    finished_at timestamp without time zone,
+    origins text COLLATE pg_catalog."default",
+    destinations text COLLATE pg_catalog."default",
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    origin_index text COLLATE pg_catalog."default",
+    destination_index text COLLATE pg_catalog."default",
+    started_at timestamp without time zone,
+    meta text COLLATE pg_catalog."default",
+    CONSTRAINT chunks_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mdm.chunks
+    OWNER to fangzhou;
+*/
