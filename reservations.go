@@ -18,6 +18,7 @@ const (
 type Reservation struct {
 	ID          int              `gorm:"column:id"`
 	TaskID      string           `gorm:"column:task_id"`
+	TaskIDNum   uint32           `gorm:"column:task_id_num"`
 	Area        string           `gorm:"column:area"`
 	Mode        string           `gorm:"column:mode"`
 	Option      string           `gorm:"column:option"`
