@@ -11,6 +11,7 @@ type TaskState int
 const (
 	// TPending means the task has just been created, waiting for processing.
 	TPending TaskState = iota
+	TResourceCreating
 	// TRunning means the task has been picked up by the MDM Director and started processing.
 	TRunning
 	// TPartiallySucceeded means the whole task has been finished but some chunks failed to be processed.
@@ -26,6 +27,8 @@ func (s TaskState) String() string {
 	switch {
 	case s == TPending:
 		res = "pending"
+	case s == TResourceCreating:
+		res = "resource_creating"
 	case s == TRunning:
 		res = "running"
 	case s == TPartiallySucceeded:

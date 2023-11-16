@@ -41,6 +41,24 @@ func (p *PodInfo) AppendCurrentJob(job string) {
 	currentJob := strings.Split(p.CurrentJob, "|")
 	currentJob = append(currentJob, job)
 	p.CurrentJob = strings.Join(currentJob, "|")
+	p.CurrentJobCount++
+}
+
+func (p *PodInfo) RemoveCurrentJob(taskID string) int {
+	currentJob := strings.Split(p.CurrentJob, "|")
+
+	removeCount := 0
+	newCurrentJob := make([]string, 0)
+	for _, v := range currentJob {
+		if strings.HasPrefix(v, taskID) {
+			removeCount++
+			p.CurrentJobCount -= 1
+			continue
+		}
+		newCurrentJob = append(newCurrentJob, v)
+	}
+	p.CurrentJob = strings.Join(currentJob, "|")
+	return removeCount
 }
 
 func (PodInfo) TableName() string {

@@ -8,7 +8,8 @@ import (
 type ReservationState int
 
 const (
-	RApplying ReservationState = iota
+	RPending ReservationState = iota
+	RApplying
 	RRunning
 	RFinished
 	RFailed
