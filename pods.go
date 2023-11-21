@@ -20,6 +20,7 @@ type PodInfo struct {
 	Name            string    `gorm:"column:name"`
 	CPU             int       `gorm:"column:cpu"`
 	Memory          int       `gorm:"column:memory"`
+	Storage         string    `gorm:"column:storage"`
 	Option          string    `gorm:"column:option"`
 	Mode            string    `gorm:"column:mode"`
 	Area            string    `gorm:"column:area"`
