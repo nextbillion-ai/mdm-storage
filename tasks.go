@@ -3,6 +3,7 @@ package mdmstorage
 import (
 	"encoding/json"
 	"errors"
+	"strings"
 	"time"
 )
 
@@ -49,6 +50,7 @@ type Task struct {
 	OriginalReq           string    `gorm:"column:original_req"`
 	ExtractedParams       string    `gorm:"column:extracted_params"`
 	State                 TaskState `gorm:"column:state"`
+	PodString             string    `gorm:"column:pod"`
 	ResourceAllocatorMeta string    `gorm:"column:resource_allocator_meta"`
 	Area                  string    `gorm:"column:area"`
 	CreateAt              time.Time `gorm:"column:created_at"`
@@ -57,6 +59,23 @@ type Task struct {
 	RetryTimes            uint8     `gorm:"column:retry_times"`
 	CDNAddr               string    `gorm:"column:cdn_addr"`
 	Meta                  string    `gorm:"column:meta"`
+}
+
+func (t *Task) GetPod() []string {
+	return strings.Split(t.PodString, "|")
+}
+
+func (t *Task) GetExtractedParams() *ExtractedParams {
+	if t.ExtractedParams == "" {
+		return nil
+	}
+
+	res := new(ExtractedParams)
+	err := json.Unmarshal([]byte(t.ExtractedParams), res)
+	if err != nil {
+		return nil
+	}
+	return res
 }
 
 type Meta struct {
@@ -93,12 +112,6 @@ func (ep *ExtractedParams) ToJson() (string, error) {
 	}
 	res, err := json.Marshal(ep)
 	return string(res), err
-}
-
-func ToExtractedParams(value string) (*ExtractedParams, error) {
-	res := new(ExtractedParams)
-	err := json.Unmarshal([]byte(value), res)
-	return res, err
 }
 
 // TableName overrides the table name used by Task to `profiles`
