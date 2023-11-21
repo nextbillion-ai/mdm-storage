@@ -73,13 +73,14 @@ DROP TABLE IF EXISTS mdm.pods;
 
 create sequence mdm.pods_id_seq;
 alter sequence mdm.pods_id_seq owner to fangzhou;
-
+DROP TABLE IF EXISTS mdm.pods;
 CREATE TABLE IF NOT EXISTS mdm.pods
 (
     id bigint NOT NULL DEFAULT nextval('mdm.pods_id_seq'::regclass),
     name character varying(255) COLLATE pg_catalog."default" NOT NULL,
     cpu integer,
     memory integer,
+    storage character varying(255) COLLATE pg_catalog."default" NOT NULL,
     option character varying(255) COLLATE pg_catalog."default" NOT NULL,
     mode character varying(255) COLLATE pg_catalog."default" NOT NULL,
     area character varying(255) COLLATE pg_catalog."default" NOT NULL,
