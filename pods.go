@@ -31,6 +31,7 @@ type PodInfo struct {
 	RetryTimes      uint8     `gorm:"column:retry_times"`
 	Meta            string    `gorm:"column:meta"`
 	CreateAt        time.Time `gorm:"column:created_at"`
+	UpdateAt        time.Time `gorm:"column:update_at"`
 	FinishedAt      time.Time `gorm:"column:finished_at"`
 }
 
