@@ -3,6 +3,7 @@ package mdmstorage
 import (
 	"encoding/json"
 	"errors"
+	"strings"
 	"time"
 )
 
@@ -54,6 +55,30 @@ type Task struct {
 	RetryTimes            uint8     `gorm:"column:retry_times"`
 	CDNAddr               string    `gorm:"column:cdn_addr"`
 	Meta                  string    `gorm:"column:meta"`
+}
+
+func (t *Task) GetPod() []string {
+	if strings.Trim(t.ResourceAllocatorMeta, " ") == "" {
+		return nil
+	}
+	return strings.Split(t.ResourceAllocatorMeta, "|")
+}
+
+func (t *Task) SetPod(p []string) {
+	t.ResourceAllocatorMeta = strings.Join(p, "|")
+}
+
+func (t *Task) GetExtractedParams() *ExtractedParams {
+	if t.ExtractedParams == "" {
+		return nil
+	}
+
+	res := new(ExtractedParams)
+	err := json.Unmarshal([]byte(t.ExtractedParams), res)
+	if err != nil {
+		return nil
+	}
+	return res
 }
 
 type Meta struct {
