@@ -123,6 +123,39 @@ func ToExtractedParams(value string) (*ExtractedParams, error) {
 	return res, err
 }
 
+type OriginalReq struct {
+	Origins       string `json:"origins"`
+	Destinations  string `json:"destinations"`
+	Mode          string `json:"mode,omitempty"`
+	DepartureTime uint64 `json:"departure_time,omitempty"`
+	Context       string `json:"context,omitempty"`
+	Avoid         string `json:"avoid,omitempty"`
+	Approaches    string `json:"approaches,omitempty"`
+
+	OriginsApproach      string `json:"origins_approach,omitempty"`
+	DestinationsApproach string `json:"destinations_approach,omitempty"`
+
+	RouteType   string `json:"route_type,omitempty"`
+	TruckSize   string `json:"truck_size,omitempty"`
+	TruckWeight uint32 `json:"truck_weight,omitempty"`
+	Option      string `json:"option,omitempty"`
+	Area        string `json:"area"`
+	Key         string `json:"-"`
+}
+
+func (t *Task) GetOriginalReq() *OriginalReq {
+	if t.OriginalReq == "" {
+		return nil
+	}
+
+	res := new(OriginalReq)
+	err := json.Unmarshal([]byte(t.OriginalReq), res)
+	if err != nil {
+		return nil
+	}
+	return res
+}
+
 // TableName overrides the table name used by Task to `profiles`
 func (Task) TableName() string {
 	return "mdm.tasks"
