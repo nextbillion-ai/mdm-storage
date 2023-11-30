@@ -37,6 +37,9 @@ type PodInfo struct {
 
 func (p *PodInfo) Match(task *Task) bool {
 	ep := task.GetExtractedParams()
+	if ep.Option == "flexible" {
+		ep.Mode = "all"
+	}
 	return p.Mode == ep.Mode && p.Area == task.Area && p.Option == ep.Option
 }
 
