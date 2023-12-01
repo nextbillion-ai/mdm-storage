@@ -40,6 +40,13 @@ func (p *PodInfo) Match(task *Task) bool {
 	if ep.Option == "flexible" {
 		ep.Mode = "all"
 	}
+	// parse mode
+	if ep.Mode == "6w" || ep.Mode == "truck" {
+		ep.Mode = "6w"
+	}
+	if ep.Mode == "4w" || ep.Mode == "car" || ep.Mode == "auto" {
+		ep.Mode = "4w"
+	}
 	return p.Mode == ep.Mode && p.Area == task.Area && p.Option == ep.Option
 }
 
