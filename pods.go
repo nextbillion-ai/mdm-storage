@@ -1,6 +1,7 @@
 package mdmstorage
 
 import (
+	"fmt"
 	"strings"
 	"time"
 )
@@ -54,20 +55,22 @@ func (p *PodInfo) AvailableQuota() int {
 	return p.CPU - p.CurrentJobCount
 }
 
-func (p *PodInfo) AppendCurrentJob(job string) {
+func (p *PodInfo) AppendCurrentJob(taskID string, chunkID uint32) {
+	job := fmt.Sprintf("%v::%v", taskID, chunkID)
 	currentJob := strings.Split(p.CurrentJob, "|")
 	currentJob = append(currentJob, job)
 	p.CurrentJob = strings.Join(currentJob, "|")
 	p.CurrentJobCount++
 }
 
-func (p *PodInfo) RemoveCurrentJob(taskID string) int {
-	currentJob := strings.Split(p.CurrentJob, "|")
+func (p *PodInfo) RemoveCurrentJob(taskID string, chunkID uint32) int {
+	job := fmt.Sprintf("%v::%v", taskID, chunkID)
 
+	currentJob := strings.Split(p.CurrentJob, "|")
 	removeCount := 0
 	newCurrentJob := make([]string, 0)
 	for _, v := range currentJob {
-		if strings.HasPrefix(v, taskID) {
+		if v == job {
 			removeCount++
 			p.CurrentJobCount -= 1
 			continue

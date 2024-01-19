@@ -3,7 +3,6 @@ package mdmstorage
 import (
 	"encoding/json"
 	"errors"
-	"strings"
 	"time"
 )
 
@@ -42,7 +41,7 @@ func (s TaskState) String() string {
 type Task struct {
 	ID                    uint32    `gorm:"column:id;primaryKey"`
 	TaskID                string    `gorm:"column:task_id"`
-	NumOfChunks           uint16    `gorm:"column:num_of_chunks"`
+	NumOfChunks           int       `gorm:"column:num_of_chunks"`
 	OutputAddr            string    `gorm:"column:output_addr"`
 	OriginalReq           string    `gorm:"column:original_req"`
 	ExtractedParams       string    `gorm:"column:extracted_params"`
@@ -55,17 +54,6 @@ type Task struct {
 	RetryTimes            uint8     `gorm:"column:retry_times"`
 	CDNAddr               string    `gorm:"column:cdn_addr"`
 	Meta                  string    `gorm:"column:meta"`
-}
-
-func (t *Task) GetPod() []string {
-	if strings.Trim(t.ResourceAllocatorMeta, " ") == "" {
-		return nil
-	}
-	return strings.Split(t.ResourceAllocatorMeta, "|")
-}
-
-func (t *Task) SetPod(p []string) {
-	t.ResourceAllocatorMeta = strings.Join(p, "|")
 }
 
 func (t *Task) GetExtractedParams() *ExtractedParams {
