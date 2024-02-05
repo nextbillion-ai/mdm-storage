@@ -36,43 +36,36 @@ type PodInfo struct {
 	FinishedAt      time.Time `gorm:"column:finished_at"`
 }
 
-func (p *PodInfo) Match(task *Task) bool {
-	ep := task.GetExtractedParams()
-	if ep.Option == "flexible" {
-		ep.Mode = "all"
-	}
-	// parse mode
-	if ep.Mode == "6w" || ep.Mode == "truck" {
-		ep.Mode = "6w"
-	}
-	if ep.Mode == "4w" || ep.Mode == "car" || ep.Mode == "auto" {
-		ep.Mode = "4w"
-	}
-	return p.Mode == ep.Mode && p.Area == task.Area && p.Option == ep.Option
+func (p *PodInfo) Match(mode, area, option string) bool {
+	return p.Mode == mode && p.Area == area && p.Option == option
 }
 
-func (p *PodInfo) AvailableQuota() int {
-	return p.CPU - p.CurrentJobCount
+func (p *PodInfo) GetCurrentJob() []string {
+	if strings.Trim(p.CurrentJob, " ") == "" {
+		return make([]string, 0)
+	}
+	return strings.Split(p.CurrentJob, "|")
 }
 
 func (p *PodInfo) AppendCurrentJob(taskID string, chunkID uint32) {
 	job := fmt.Sprintf("%v::%v", taskID, chunkID)
-	currentJob := strings.Split(p.CurrentJob, "|")
-	currentJob = append(currentJob, job)
-	p.CurrentJob = strings.Join(currentJob, "|")
-	p.CurrentJobCount++
+	if strings.Trim(p.CurrentJob, " ") == "" {
+		p.CurrentJob = job
+		return
+	}
+	currentJobs := strings.Split(p.CurrentJob, "|")
+	currentJobs = append(currentJobs, job)
+	p.CurrentJob = strings.Join(currentJobs, "|")
 }
 
 func (p *PodInfo) RemoveCurrentJob(taskID string, chunkID uint32) int {
 	job := fmt.Sprintf("%v::%v", taskID, chunkID)
-
 	currentJob := strings.Split(p.CurrentJob, "|")
 	removeCount := 0
 	newCurrentJob := make([]string, 0)
 	for _, v := range currentJob {
 		if v == job {
 			removeCount++
-			p.CurrentJobCount -= 1
 			continue
 		}
 		newCurrentJob = append(newCurrentJob, v)
@@ -81,6 +74,6 @@ func (p *PodInfo) RemoveCurrentJob(taskID string, chunkID uint32) int {
 	return removeCount
 }
 
-func (PodInfo) TableName() string {
+func (p *PodInfo) TableName() string {
 	return "mdm.pods"
 }
