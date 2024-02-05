@@ -145,6 +145,6 @@ func (t *Task) GetOriginalReq() *OriginalReq {
 }
 
 // TableName overrides the table name used by Task to `profiles`
-func (Task) TableName() string {
+func (t *Task) TableName() string {
 	return "mdm.tasks"
 }
