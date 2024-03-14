@@ -89,12 +89,17 @@ type ExtractedParams struct {
 	OriginsApproach      string `json:"origins_approach,omitempty"`
 	DestinationsApproach string `json:"destinations_approach,omitempty"`
 
-	RouteType   string `json:"route_type,omitempty"`
-	TruckSize   string `json:"truck_size,omitempty"`
-	TruckWeight uint32 `json:"truck_weight,omitempty"`
-	Option      string `json:"option,omitempty"`
-	Mode        string `json:"mode,omitempty"`
-	Caller      string `json:"caller,omitempty"`
+	RouteType      string  `json:"route_type,omitempty"`
+	TruckSize      string  `json:"truck_size,omitempty"`
+	TruckWeight    uint32  `json:"truck_weight,omitempty"`
+	TruckAxleCount uint    `json:"truck_axle_count,omitempty"`
+	TruckAxleLoad  float64 `json:"truck_axle_load,omitempty"`
+	HazmatType     string  `json:"hazmat_type,omitempty"`
+	CrossBorder    bool    `json:"cross_border,omitempty"`
+
+	Option string `json:"option,omitempty"`
+	Mode   string `json:"mode,omitempty"`
+	Caller string `json:"caller,omitempty"`
 }
 
 func (ep *ExtractedParams) ToJson() (string, error) {
