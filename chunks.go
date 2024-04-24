@@ -1,6 +1,10 @@
 package mdmstorage
 
-import "time"
+import (
+	"encoding/json"
+	"fmt"
+	"time"
+)
 
 type ChunkState int
 
@@ -44,10 +48,31 @@ type Chunk struct {
 	OriginIndex      string     `gorm:"column:origin_index"`
 	DestinationIndex string     `gorm:"column:destination_index"`
 	CreateAt         time.Time  `gorm:"column:created_at"`
-	Meta             string     `gorm:"column:meta"`
+	MetaStr          string     `gorm:"column:meta"`
+	Meta             *Meta      `gorm:"-"`
+}
+
+func (c *Chunk) FlattenToString() {
+	// flatten meta to string
+	if c.Meta == nil {
+		return
+	}
+	res, err := json.Marshal(c.Meta)
+	if err != nil {
+		c.MetaStr = fmt.Sprintf("failed to marshal task meta: %v", err)
+		return
+	}
+	c.MetaStr = string(res)
 }
 
 // TableName overrides the table name used by Task to `profiles`
 func (c *Chunk) TableName() string {
 	return "mdm.chunks"
+}
+
+func (c *Chunk) SetFailureReason(reason string) {
+	if c.Meta == nil {
+		c.Meta = &Meta{}
+	}
+	c.MetaStr = string(reason)
 }

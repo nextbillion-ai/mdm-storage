@@ -3,6 +3,7 @@ package mdmstorage
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"time"
 )
 
@@ -44,7 +45,7 @@ type Task struct {
 	NumOfChunks           int       `gorm:"column:num_of_chunks"`
 	OutputAddr            string    `gorm:"column:output_addr"`
 	OriginalReq           string    `gorm:"column:original_req"`
-	ExtractedParams       string    `gorm:"column:extracted_params"`
+	ExtractedParamsStr    string    `gorm:"column:extracted_params"`
 	State                 TaskState `gorm:"column:state"`
 	ResourceAllocatorMeta string    `gorm:"column:resource_allocator_meta"`
 	Area                  string    `gorm:"column:area"`
@@ -53,25 +54,50 @@ type Task struct {
 	FinishedAt            time.Time `gorm:"column:finished_at"`
 	RetryTimes            uint8     `gorm:"column:retry_times"`
 	CDNAddr               string    `gorm:"column:cdn_addr"`
-	Meta                  string    `gorm:"column:meta"`
+	MetaStr               string    `gorm:"column:meta"`
+
+	ExtractedParams *ExtractedParams `gorm:"-"`
+	Meta            *Meta            `gorm:"-"`
 }
 
 func (t *Task) GetExtractedParams() *ExtractedParams {
-	if t.ExtractedParams == "" {
+	if t.ExtractedParamsStr == "" {
 		return nil
 	}
-
-	res := new(ExtractedParams)
-	err := json.Unmarshal([]byte(t.ExtractedParams), res)
-	if err != nil {
-		return nil
+	if t.ExtractedParams == nil {
+		res := new(ExtractedParams)
+		err := json.Unmarshal([]byte(t.ExtractedParamsStr), res)
+		if err != nil {
+			return nil
+		}
+		t.ExtractedParams = res
 	}
-	return res
+	return t.ExtractedParams
 }
 
 type Meta struct {
 	FailureReason string   `json:"failure_reason,omitempty"`
 	Errors        []string `json:"errors,omitempty"`
+}
+
+func (t *Task) FlattenToString() {
+	// flatten meta to string
+	if t.Meta == nil {
+		return
+	}
+	res, err := json.Marshal(t.Meta)
+	if err != nil {
+		t.MetaStr = fmt.Sprintf("failed to marshal task meta: %v", err)
+		return
+	}
+	t.MetaStr = string(res)
+}
+
+func (t *Task) SetFailureReason(reason string) {
+	if t.Meta == nil {
+		t.Meta = &Meta{}
+	}
+	t.Meta.FailureReason = reason
 }
 
 // ExtractedParams is the struct of extracted_params in tasks table
