@@ -1,3 +1,3 @@
-module nextbillion.ai/mdm-storage
+module src.nextbillion.io/shared/mdm-storage
 
 go 1.20
