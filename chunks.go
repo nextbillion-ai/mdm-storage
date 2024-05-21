@@ -59,7 +59,7 @@ func (c *Chunk) FlattenToString() {
 	}
 	res, err := json.Marshal(c.Meta)
 	if err != nil {
-		c.MetaStr = fmt.Sprintf("failed to marshal task meta: %v", err)
+		c.MetaStr = fmt.Sprintf("failed to marshal task meta. mete:%v, err: %v", c.Meta, err)
 		return
 	}
 	c.MetaStr = string(res)
@@ -74,5 +74,5 @@ func (c *Chunk) SetFailureReason(reason string) {
 	if c.Meta == nil {
 		c.Meta = &Meta{}
 	}
-	c.MetaStr = string(reason)
+	c.Meta.FailureReason = reason
 }
