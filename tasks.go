@@ -105,6 +105,7 @@ type ExtractedParams struct {
 	DepartureTime      uint64 `json:"departure_time,omitempty"`
 	Context            string `json:"context,omitempty"`
 	Avoid              string `json:"avoid,omitempty"`
+	Allow              string `json:"allow,omitempty"`
 	Key                string `json:"key,omitempty"`
 	NbGatewayTrackInfo string `json:"nb-gateway-track-info,omitempty"`
 	Spliter            string `json:"spliter,omitempty"`
