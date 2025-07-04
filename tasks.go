@@ -127,6 +127,7 @@ type ExtractedParams struct {
 	Option string `json:"option,omitempty"`
 	Mode   string `json:"mode,omitempty"`
 	Caller string `json:"caller,omitempty"`
+	OrgID  string `json:"org_id,omitempty"`
 }
 
 func (ep *ExtractedParams) ToJson() (string, error) {
