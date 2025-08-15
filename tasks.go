@@ -116,13 +116,14 @@ type ExtractedParams struct {
 	OriginsApproach      string `json:"origins_approach,omitempty"`
 	DestinationsApproach string `json:"destinations_approach,omitempty"`
 
-	RouteType      string  `json:"route_type,omitempty"`
-	TruckSize      string  `json:"truck_size,omitempty"`
-	TruckWeight    uint32  `json:"truck_weight,omitempty"`
-	TruckAxleCount uint    `json:"truck_axle_count,omitempty"`
-	TruckAxleLoad  float64 `json:"truck_axle_load,omitempty"`
-	HazmatType     string  `json:"hazmat_type,omitempty"`
-	CrossBorder    bool    `json:"cross_border,omitempty"`
+	RouteType         string  `json:"route_type,omitempty"`
+	TruckSize         string  `json:"truck_size,omitempty"`
+	TruckWeight       uint32  `json:"truck_weight,omitempty"`
+	TruckAxleCount    uint    `json:"truck_axle_count,omitempty"`
+	TruckAxleLoad     float64 `json:"truck_axle_load,omitempty"`
+	HazmatType        string  `json:"hazmat_type,omitempty"`
+	CrossBorder       bool    `json:"cross_border,omitempty"`
+	RouteFailedPrompt bool    `json:"route_failed_prompt"`
 
 	Option string `json:"option,omitempty"`
 	Mode   string `json:"mode,omitempty"`
@@ -145,23 +146,38 @@ func ToExtractedParams(value string) (*ExtractedParams, error) {
 }
 
 type OriginalReq struct {
-	Origins       string `json:"origins"`
-	Destinations  string `json:"destinations"`
-	Mode          string `json:"mode,omitempty"`
-	DepartureTime uint64 `json:"departure_time,omitempty"`
-	Context       string `json:"context,omitempty"`
-	Avoid         string `json:"avoid,omitempty"`
-	Approaches    string `json:"approaches,omitempty"`
+	Origins      string `json:"origins"`
+	Destinations string `json:"destinations"`
+
+	DepartureTime      uint64 `json:"departure_time,omitempty"`
+	Context            string `json:"context,omitempty"`
+	Avoid              string `json:"avoid,omitempty"`
+	Allow              string `json:"allow,omitempty"`
+	NbGatewayTrackInfo string `json:"nb-gateway-track-info,omitempty"`
+	Spliter            string `json:"spliter,omitempty"`
+
+	// TODO: skip approaches for now
+	Approaches string `json:"approaches,omitempty"`
 
 	OriginsApproach      string `json:"origins_approach,omitempty"`
 	DestinationsApproach string `json:"destinations_approach,omitempty"`
 
-	RouteType   string `json:"route_type,omitempty"`
-	TruckSize   string `json:"truck_size,omitempty"`
-	TruckWeight uint32 `json:"truck_weight,omitempty"`
-	Option      string `json:"option,omitempty"`
-	Area        string `json:"area"`
-	Key         string `json:"-"`
+	RouteType         string  `json:"route_type,omitempty"`
+	TruckSize         string  `json:"truck_size,omitempty"`
+	TruckWeight       uint32  `json:"truck_weight,omitempty"`
+	TruckAxleCount    uint    `json:"truck_axle_count,omitempty"`
+	TruckAxleLoad     float64 `json:"truck_axle_load,omitempty"`
+	HazmatType        string  `json:"hazmat_type,omitempty"`
+	CrossBorder       bool    `json:"cross_border,omitempty"`
+	RouteFailedPrompt bool    `json:"route_failed_prompt"`
+
+	Option string `json:"option,omitempty"`
+	Mode   string `json:"mode,omitempty"`
+	Caller string `json:"caller,omitempty"`
+	OrgID  string `json:"org_id,omitempty"`
+
+	Area string `json:"area"`
+	Key  string `json:"-"`
 }
 
 func (t *Task) GetOriginalReq() *OriginalReq {
