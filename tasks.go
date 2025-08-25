@@ -125,10 +125,10 @@ type ExtractedParams struct {
 	CrossBorder       *bool    `json:"cross_border,omitempty" form:"cross_border,omitempty"`
 	RouteFailedPrompt *bool    `json:"route_failed_prompt,omitempty" form:"route_failed_prompt,omitempty"`
 
-	Option string  `json:"option,omitempty"`
-	Mode   *string `json:"mode,omitempty" form:"mode,omitempty"`
-	Caller string  `json:"caller,omitempty"`
-	OrgID  string  `json:"org_id,omitempty"`
+	Option string `json:"option,omitempty"`
+	Mode   string `json:"mode,omitempty" form:"mode,omitempty"`
+	Caller string `json:"caller,omitempty"`
+	OrgID  string `json:"org_id,omitempty"`
 
 	ArriveTime          *uint64 `json:"arrive_time,omitempty" form:"arrive_time,omitempty"`
 	SnapAvoid           *string `json:"snap_avoid,omitempty" form:"snap_avoid,omitempty"`
