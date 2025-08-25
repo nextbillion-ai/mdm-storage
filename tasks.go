@@ -76,6 +76,7 @@ func (t *Task) GetExtractedParams() *ExtractedParams {
 }
 
 type Meta struct {
+	OriginalReq   string   `json:"original_req,omitempty"`
 	FailureReason string   `json:"failure_reason,omitempty"`
 	Errors        []string `json:"errors,omitempty"`
 }
