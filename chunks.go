@@ -76,3 +76,10 @@ func (c *Chunk) SetFailureReason(reason string) {
 	}
 	c.Meta.FailureReason = reason
 }
+
+func (c *Chunk) SetOriginalReq(originalReq string) {
+	if c.Meta == nil {
+		c.Meta = &Meta{}
+	}
+	c.Meta.OriginalReq = originalReq
+}
