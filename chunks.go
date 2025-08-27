@@ -71,14 +71,14 @@ func (c *Chunk) TableName() string {
 }
 
 func (c *Chunk) SetFailureReason(reason string) {
-	if c.Meta == nil {
+	if c.Meta == nil && json.Unmarshal([]byte(c.MetaStr), &c.Meta) != nil {
 		c.Meta = &Meta{}
 	}
 	c.Meta.FailureReason = reason
 }
 
 func (c *Chunk) SetOriginalReq(originalReq string) {
-	if c.Meta == nil {
+	if c.Meta == nil && json.Unmarshal([]byte(c.MetaStr), &c.Meta) != nil {
 		c.Meta = &Meta{}
 	}
 	c.Meta.OriginalReq = originalReq
