@@ -103,42 +103,45 @@ func (t *Task) SetFailureReason(reason string) {
 
 // ExtractedParams is the struct of extracted_params in tasks table
 type ExtractedParams struct {
-	DepartureTime      *uint64 `json:"departure_time,omitempty" form:"departure_time,omitempty"`
-	Context            *string `json:"context,omitempty" form:"context,omitempty"`
-	Avoid              *string `json:"avoid,omitempty" form:"avoid,omitempty"`
-	Allow              *string `json:"allow,omitempty" form:"allow,omitempty"`
-	Key                string  `json:"key,omitempty" form:"key,omitempty"`
-	NbGatewayTrackInfo string  `json:"nb-gateway-track-info,omitempty"`
-	Spliter            string  `json:"spliter,omitempty"`
+	Key     string  `json:"key" form:"key"`
+	Option  string  `json:"option" form:"option"`
+	Mode    string  `json:"mode" form:"mode"`
+	Caller  string  `json:"caller" form:"caller"`
+	OrgID   string  `json:"org_id" form:"org_id"`
+	Context *string `json:"context,omitempty" form:"context,omitempty"`
 
-	Approaches *string `json:"approaches,omitempty" form:"approaches,omitempty"`
+	Spliter            *string `json:"spliter,omitempty" form:"spliter,omitempty"`
+	NbGatewayTrackInfo *string `json:"nb-gateway-track-info,omitempty" form:"nb-gateway-track-info,omitempty"`
 
+	ArriveTime    *uint64 `json:"arrive_time,omitempty" form:"arrive_time,omitempty"`
+	DepartureTime *uint64 `json:"departure_time,omitempty" form:"departure_time,omitempty"`
+
+	Approaches           *string `json:"approaches,omitempty" form:"approaches,omitempty"`
 	OriginApproaches     *string `json:"origin_approaches,omitempty" form:"origin_approaches,omitempty"`
 	DestinationsApproach *string `json:"destinations_approach,omitempty" form:"destinations_approach,omitempty"`
+	OriginsApproach      *string `json:"origins_approach,omitempty" form:"origins_approach,omitempty"`
 
-	RouteType         *string  `json:"route_type,omitempty" form:"route_type,omitempty"`
-	TruckSize         *string  `json:"truck_size,omitempty" form:"truck_size,omitempty"`
-	TruckWeight       *uint    `json:"truck_weight,omitempty" form:"truck_weight,omitempty"`
-	TruckAxleCount    *uint    `json:"truck_axle_count,omitempty" form:"truck_axle_count,omitempty"`
-	TruckAxleLoad     *float64 `json:"truck_axle_load,omitempty" form:"truck_axle_load,omitempty"`
-	HazmatType        *string  `json:"hazmat_type,omitempty" form:"hazmat_type,omitempty"`
-	CrossBorder       *bool    `json:"cross_border,omitempty" form:"cross_border,omitempty"`
-	RouteFailedPrompt *bool    `json:"route_failed_prompt,omitempty" form:"route_failed_prompt,omitempty"`
+	TruckSize      *string  `json:"truck_size,omitempty" form:"truck_size,omitempty"`
+	TruckWeight    *uint    `json:"truck_weight,omitempty" form:"truck_weight,omitempty"`
+	TruckAxleCount *uint    `json:"truck_axle_count,omitempty" form:"truck_axle_count,omitempty"`
+	TruckAxleLoad  *float64 `json:"truck_axle_load,omitempty" form:"truck_axle_load,omitempty"`
 
-	Option string `json:"option,omitempty"`
-	Mode   string `json:"mode,omitempty" form:"mode,omitempty"`
-	Caller string `json:"caller,omitempty"`
-	OrgID  string `json:"org_id,omitempty"`
+	HazmatType  *string `json:"hazmat_type,omitempty" form:"hazmat_type,omitempty"`
+	CrossBorder *bool   `json:"cross_border,omitempty" form:"cross_border,omitempty"`
 
-	ArriveTime          *uint64 `json:"arrive_time,omitempty" form:"arrive_time,omitempty"`
-	SnapAvoid           *string `json:"snap_avoid,omitempty" form:"snap_avoid,omitempty"`
-	Exclude             *string `json:"exclude,omitempty" form:"exclude,omitempty"`
-	Prefer              *string `json:"prefer,omitempty" form:"prefer,omitempty"`
-	OriginsApproach     *string `json:"origins_approach,omitempty" form:"origins_approach,omitempty"`
-	EmissionClass       *string `json:"emission_class,omitempty" form:"emission_class,omitempty"`
-	TurnAngleRange      *uint   `json:"turn_angle_range,omitempty" form:"turn_angle_range,omitempty"`
-	IgnoreRestrictions  bool    `json:"ignore_restrictions,omitempty" form:"ignore_restrictions,omitempty"`
-	IgnoreTimeDependent bool    `json:"ignore_time_dependent,omitempty" form:"ignore_time_dependent,omitempty"`
+	RouteType *string `json:"route_type,omitempty" form:"route_type,omitempty"`
+	SnapAvoid *string `json:"snap_avoid,omitempty" form:"snap_avoid,omitempty"`
+	Avoid     *string `json:"avoid,omitempty" form:"avoid,omitempty"`
+	Allow     *string `json:"allow,omitempty" form:"allow,omitempty"`
+	Exclude   *string `json:"exclude,omitempty" form:"exclude,omitempty"`
+	Prefer    *string `json:"prefer,omitempty" form:"prefer,omitempty"`
+
+	EmissionClass  *string `json:"emission_class,omitempty" form:"emission_class,omitempty"`
+	TurnAngleRange *uint   `json:"turn_angle_range,omitempty" form:"turn_angle_range,omitempty"`
+
+	RouteFailedPrompt   *bool `json:"route_failed_prompt,omitempty" form:"route_failed_prompt,omitempty"`
+	IgnoreRestrictions  *bool `json:"ignore_restrictions,omitempty" form:"ignore_restrictions,omitempty"`
+	IgnoreTimeDependent *bool `json:"ignore_time_dependent,omitempty" form:"ignore_time_dependent,omitempty"`
 }
 
 func (ep *ExtractedParams) ToJson() (string, error) {
