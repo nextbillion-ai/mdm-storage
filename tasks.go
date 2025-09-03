@@ -110,8 +110,8 @@ type ExtractedParams struct {
 	OrgID   string  `json:"org_id" form:"org_id"`
 	Context *string `json:"context,omitempty" form:"context,omitempty"`
 
-	Spliter            *string `json:"spliter,omitempty" form:"spliter,omitempty"`
-	NbGatewayTrackInfo *string `json:"nb-gateway-track-info,omitempty" form:"nb-gateway-track-info,omitempty"`
+	Spliter            string `json:"spliter,omitempty" form:"spliter,omitempty"`
+	NbGatewayTrackInfo string `json:"nb-gateway-track-info,omitempty" form:"nb-gateway-track-info,omitempty"`
 
 	ArriveTime    *uint64 `json:"arrive_time,omitempty" form:"arrive_time,omitempty"`
 	DepartureTime *uint64 `json:"departure_time,omitempty" form:"departure_time,omitempty"`
