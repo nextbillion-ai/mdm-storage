@@ -122,6 +122,7 @@ type ExtractedParams struct {
 	OriginsApproach      *string `json:"origins_approach,omitempty" form:"origins_approach,omitempty"`
 
 	TruckSize      *string  `json:"truck_size,omitempty" form:"truck_size,omitempty"`
+	TruckType      *string  `json:"truck_type,omitempty" form:"truck_type,omitempty"`
 	TruckWeight    *uint    `json:"truck_weight,omitempty" form:"truck_weight,omitempty"`
 	TruckAxleCount *uint    `json:"truck_axle_count,omitempty" form:"truck_axle_count,omitempty"`
 	TruckAxleLoad  *float64 `json:"truck_axle_load,omitempty" form:"truck_axle_load,omitempty"`
